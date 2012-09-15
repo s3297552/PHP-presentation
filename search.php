@@ -17,6 +17,7 @@
         exit;
     }
 	
+	function searchTitle($keyword,$sql,$result,$num){ 
 	//check whether the user's input matches the result in database
 	if ($_POST['search']==true){
 	    $keyword=$_POST["keyword"];
@@ -35,4 +36,19 @@
 		   echo "<script> alert('Sorry! No fecthed news!');</script>";
 		}
 	}
+}
+   function searchCatagory($category,$sql,$result,$num){
+   $category=$_GET["category"];
+   if ($category != 1){
+       $sql="SELECT * FROM category
+	         WHERE catagory.ID=$category";
+	   $result=mysql_query($sql);
+	   $num=mysql_num_rows($result);
+	   
+		for($i=0;$i<$num;$i++){
+		  $record=mysql_fetch_array($result);
+		  echo $record[name]."<br>";
+		}
+   }
+}
 ?>
